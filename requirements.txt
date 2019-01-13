@@ -1,6 +1,5 @@
 Django
 dj-static
-django-bootstrap4
 django-extensions
 django-test-without-migrations
 dj-database-url
