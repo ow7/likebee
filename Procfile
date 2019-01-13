@@ -1,1 +1,1 @@
-web: gunicorn djangoherokuaws.wsgi --log-file -
+web: gunicorn likebee.wsgi --log-file -

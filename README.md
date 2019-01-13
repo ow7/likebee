@@ -1,2 +1,2 @@
-# django-heroku-aws-start
-Start project with Django + Heroku + AWS
+# likebee
+Building like a Bee
