@@ -14,6 +14,6 @@ psycopg2-binary
 boto3
 django-storages
 django-debug-toolbar
-django-suit==2.0a1
+-e git://github.com/darklow/django-suit.git@v2#egg=django-suit
 django-mptt==0.9.1
 django-imagekit==4.0.2
