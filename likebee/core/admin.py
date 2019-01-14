@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
+from django.utils import timezone
+from datetime import date
 from django_summernote.admin import SummernoteModelAdmin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 from .models import Priority, Status, Sprint, Project, Task
@@ -33,8 +35,15 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
         if not obj.finish_on:
             return ''
 
-        return obj.finish_on.strftime('%b %-d')
+        color = '#373A3C'
+        if obj.finish_on.date() < date.today():
+            color = '#E0465E'
 
+        return format_html(
+            '<span style="color: {}">{}</span>'.format(
+                color, obj.finish_on.strftime('%b %-d')))
+
+    formatted_finish.allow_tags = True
     formatted_finish.admin_order_field = 'finish_on'
     formatted_finish.short_description = _('Data')
 
