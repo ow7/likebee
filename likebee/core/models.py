@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
 from mptt.models import MPTTModel, TreeForeignKey
-from ..accounts.models import User, Profile
+from ..accounts.models import User
 
 
 COLOR_TEXT_CHOICES = (
@@ -114,8 +114,8 @@ class Task(MPTTModel):
         _(u'Título'), max_length=200
     )
     parent = TreeForeignKey(
-        'self', on_delete=models.CASCADE, blank=True, null=True,
-        related_name='children'
+        'self', verbose_name=_(u'Tarefa pai'), on_delete=models.CASCADE,
+        blank=True, null=True, related_name='children'
     )
     description = models.TextField(
         _(u'Descrição'), blank=True, null=True
@@ -156,24 +156,3 @@ class Task(MPTTModel):
     #     return '{} - {}'.format(self.sprint, self.title)
     def __str__(self):
         return self.title
-
-    def owner_thumb(self):
-        if self.owner:
-            profile = Profile.objects.filter(user=self.owner)
-            for item in profile:
-                print(item.photo.url)
-                if item.photo:
-                    img = item.photo_thumbnail.url
-                else:
-                    img = None
-
-                if img:
-                    return format_html(
-                        '<img src="{0}" width="35" />'.format(img)
-                    )
-            owner = self.owner
-        else:
-            owner = ''
-
-        return '{}'.format(owner)
-    owner_thumb.short_description = 'Foto'

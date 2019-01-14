@@ -4,6 +4,7 @@ from django.utils.html import format_html
 from django_summernote.admin import SummernoteModelAdmin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 from .models import Priority, Status, Sprint, Project, Task
+from ..accounts.models import Profile
 
 
 @admin.register(Task)
@@ -72,6 +73,28 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     colored_status.allow_tags = True
     colored_status.admin_order_field = 'status'
     colored_status.short_description = _('Status')
+
+    def owner_thumb(self, obj):
+        if obj.owner:
+            profile = Profile.objects.filter(user=obj.owner)
+            for item in profile:
+                if item.photo:
+                    img = item.photo_thumbnail.url
+                else:
+                    img = None
+
+                if img:
+                    return format_html(
+                        '<img src="{0}" width="35" />'.format(img)
+                    )
+            owner = obj.owner
+        else:
+            owner = ''
+
+        return '{}'.format(owner)
+    owner_thumb.allow_tags = True
+    owner_thumb.admin_order_field = 'owner'
+    owner_thumb.short_description = _('Resp.')
 
     class Media:
         css = {
