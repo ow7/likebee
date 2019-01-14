@@ -17,3 +17,4 @@ django-debug-toolbar
 -e git://github.com/darklow/django-suit.git@v2#egg=django-suit
 django-mptt==0.9.1
 django-imagekit==4.0.2
+django-summernote==0.8.11.4
