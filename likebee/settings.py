@@ -35,6 +35,8 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 # Application definition
 
 INSTALLED_APPS = [
+    'likebee.apps.SuitConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,8 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_summernote',
     'django_extensions',
     'debug_toolbar',
+    'mptt',
+    'imagekit',
+
+    'likebee.core',
+    'likebee.accounts',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +71,7 @@ ROOT_URLCONF = 'likebee.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -167,3 +175,5 @@ CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=False, cast=bool)
 
 # DEBUG TOOLBAR
 INTERNAL_IPS = ('127.0.0.1',)
+
+AUTH_USER_MODEL = 'accounts.User'

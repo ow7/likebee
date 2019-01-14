@@ -18,8 +18,12 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 
+from .core import views as core_views
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', core_views.home, name='home'),
+    path('summernote/', include('django_summernote.urls')),
+    path('app/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if hasattr(settings, 'ADMIN_SITE_HEADER'):

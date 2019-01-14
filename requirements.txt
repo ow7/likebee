@@ -14,3 +14,6 @@ psycopg2-binary
 boto3
 django-storages
 django-debug-toolbar
+django-suit==2.0a1
+django-mptt==0.9.1
+django-imagekit==4.0.2
