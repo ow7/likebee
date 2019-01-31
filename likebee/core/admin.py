@@ -18,7 +18,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     list_display = [
         'tree_actions', 'indented_title',
         'owner_thumb', 'colored_priority', 'colored_status',
-        'formatted_finish', 'project', 'time_estimate', 'sprint'
+        'colored_task_type', 'formatted_finish', 'project', 'sprint'
     ]
     list_display_links = [
         'indented_title',
@@ -83,6 +83,24 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     colored_status.allow_tags = True
     colored_status.admin_order_field = 'status'
     colored_status.short_description = _('Status')
+
+    def colored_task_type(self, obj):
+        if obj.task_type:
+            name = obj.task_type.name
+            color = obj.task_type.color
+            color_text = obj.task_type.color_text
+        else:
+            name = '-'
+            color = '#C4C4C4'
+            color_text = '#FFFFFF'
+        return format_html(
+            '<div style="background:{}; color:{}; '
+            'text-align:center; padding: 4px;">{}</div>'.format(
+                color, color_text, name))
+
+    colored_task_type.allow_tags = True
+    colored_task_type.admin_order_field = 'task_type'
+    colored_task_type.short_description = _('Tipo')
 
     def owner_thumb(self, obj):
         if obj.owner:
