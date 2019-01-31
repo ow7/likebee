@@ -25,9 +25,6 @@ class ColorChoices(models.Model):
     order = models.PositiveIntegerField(
         _(u'Ordem'), default=0
     )
-    done = models.BooleanField(
-        _(u'Concluído?'), default=False
-    )
 
     class Meta:
         abstract = True
@@ -46,6 +43,9 @@ class Priority(ColorChoices):
 
 
 class Status(ColorChoices):
+    done = models.BooleanField(
+        _(u'Concluído?'), default=False
+    )
 
     class Meta:
         verbose_name = _(u'Status')
