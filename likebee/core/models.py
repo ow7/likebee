@@ -108,6 +108,14 @@ class Project(models.Model):
         return self.name
 
 
+class TaskType(ColorChoices):
+
+    class Meta:
+        verbose_name = _(u'Tipo')
+        verbose_name_plural = _(u'Tipos')
+        db_table = 'task_type'
+
+
 class Task(MPTTModel):
     sprint = models.ForeignKey(
         Sprint, verbose_name=_(u'Sprint'), related_name='tasks',
@@ -129,6 +137,10 @@ class Task(MPTTModel):
     )
     priority = models.ForeignKey(
         Priority, verbose_name=_(u'Prioridade'), related_name='tasks',
+        on_delete=models.CASCADE, blank=True, null=True
+    )
+    task_type = models.ForeignKey(
+        TaskType, verbose_name=_(u'Tipo'), related_name='tasks',
         on_delete=models.CASCADE, blank=True, null=True
     )
     status = models.ForeignKey(

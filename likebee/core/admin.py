@@ -5,7 +5,7 @@ from django.utils import timezone
 from datetime import date
 from django_summernote.admin import SummernoteModelAdmin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
-from .models import Priority, Status, Sprint, Project, Task
+from .models import Priority, Status, Sprint, Project, Task, TaskType
 from ..accounts.models import Profile
 
 
@@ -58,7 +58,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
             color = '#C4C4C4'
             color_text = '#FFFFFF'
         return format_html(
-            '<div style="background:{}; color:{}; ' \
+            '<div style="background:{}; color:{}; '
             'text-align:center; padding: 4px;">{}</div>'.format(
                 color, color_text, name))
 
@@ -76,7 +76,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
             color = '#C4C4C4'
             color_text = '#FFFFFF'
         return format_html(
-            '<div style="background:{}; color:{}; ' \
+            '<div style="background:{}; color:{}; '
             'text-align:center; padding: 4px;">{}</div>'.format(
                 color, color_text, name))
 
@@ -116,4 +116,5 @@ admin.site.register(Priority)
 admin.site.register(Status)
 admin.site.register(Sprint)
 admin.site.register(Project)
+admin.site.register(TaskType)
 
