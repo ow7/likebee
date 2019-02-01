@@ -163,7 +163,7 @@ class Task(MPTTModel):
         order_insertion_by = ['title']
 
     class Meta:
-        ordering = ['priority', 'status']
+        ordering = ['status', 'priority']
         verbose_name = _(u'Tarefa')
         verbose_name_plural = _(u'Tarefas')
         db_table = 'task'
