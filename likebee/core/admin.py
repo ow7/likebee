@@ -44,7 +44,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
             color = '#E0465E'
 
         return format_html(
-            '<span style="color: {}">{}</span>'.format(
+            '<span style="color: {}; font-weight: bold;">{}</span>'.format(
                 color, obj.finish_on.strftime('%b %-d')))
 
     formatted_finish.allow_tags = True
