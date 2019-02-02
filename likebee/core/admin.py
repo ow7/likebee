@@ -40,6 +40,8 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
         if obj.status:
             if (obj.finish_on.date() < date.today()) and not obj.status.done:
                 color = '#E0465E'
+        else:
+            color = '#E0465E'
 
         return format_html(
             '<span style="color: {}">{}</span>'.format(
