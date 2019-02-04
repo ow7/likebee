@@ -9,6 +9,14 @@ from .models import Priority, Status, Sprint, Project, Task, TaskType
 from ..accounts.models import Profile
 
 
+def make_done(modeladmin, request, queryset):
+    status = Status.objects.filter(done=True).first()
+    queryset.update(status=status)
+
+
+make_done.short_description = '''Marque tarefas selecionadas como concluído'''
+
+
 @admin.register(Task)
 class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     # change_list_template = 'admin/task_change_list.html'
@@ -31,6 +39,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     ]
     search_fields = ['title', 'description']
     summernote_fields = ['description']
+    actions = [make_done]
 
     def formatted_finish(self, obj):
         if not obj.finish_on:
