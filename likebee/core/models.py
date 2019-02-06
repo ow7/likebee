@@ -11,6 +11,11 @@ COLOR_TEXT_CHOICES = (
 )
 
 
+class TaskManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status__archive=False)
+
+
 class ColorChoices(models.Model):
     name = models.CharField(
         _(u'Nome'), max_length=200
@@ -45,6 +50,9 @@ class Priority(ColorChoices):
 class Status(ColorChoices):
     done = models.BooleanField(
         _(u'Concluído?'), default=False
+    )
+    archive = models.BooleanField(
+        _(u'Arquivado?'), default=False
     )
 
     class Meta:
@@ -158,6 +166,12 @@ class Task(MPTTModel):
         _(u'Tempo'), max_digits=5, decimal_places=1,
         blank=True, null=True, help_text=_('Tempo estimado em horas')
     )
+
+    all_objects = models.Manager()
+    objects = TaskManager()
+
+    class Admin:
+        manager = TaskManager()
 
     class MPTTMeta:
         order_insertion_by = ['title']

@@ -14,7 +14,17 @@ def make_done(modeladmin, request, queryset):
     queryset.update(status=status)
 
 
-make_done.short_description = '''Marque tarefas selecionadas como concluído'''
+make_done.short_description = '''
+    Marcar tarefas selecionadas como concluído'''
+
+
+def make_archive(modeladmin, request, queryset):
+    status = Status.objects.filter(archive=True).first()
+    queryset.update(status=status)
+
+
+make_archive.short_description = '''
+    Marcar tarefas selecionadas como arquivado'''
 
 
 @admin.register(Task)
@@ -39,7 +49,13 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     ]
     search_fields = ['title', 'description']
     summernote_fields = ['description']
-    actions = [make_done]
+    actions = [make_done, make_archive]
+
+    # def get_queryset(self, request):
+    #     qs = super().get_queryset(request)
+    #     if request.user.is_superuser:
+    #         return qs
+    #     return qs.filter(status__archive=False)
 
     def formatted_finish(self, obj):
         if not obj.finish_on:
