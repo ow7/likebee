@@ -83,7 +83,7 @@ class Sprint(models.Model):
     )
 
     class Meta:
-        ordering = ['start_on', 'finish_on', 'name']
+        ordering = ['-start_on', '-finish_on', 'name']
         verbose_name = _(u'Sprint')
         verbose_name_plural = _(u'Sprints')
         db_table = 'sprint'
