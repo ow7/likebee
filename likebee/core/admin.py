@@ -51,11 +51,11 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     summernote_fields = ['description']
     actions = [make_done, make_archive]
 
-    # def get_queryset(self, request):
-    #     qs = super().get_queryset(request)
-    #     if request.user.is_superuser:
-    #         return qs
-    #     return qs.filter(status__archive=False)
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(status__archive=False)
 
     def formatted_finish(self, obj):
         if not obj.finish_on:
