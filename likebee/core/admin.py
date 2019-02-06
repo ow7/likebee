@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
 from django.utils import timezone
@@ -55,7 +56,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
         qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(status__archive=False)
+        return qs.filter(Q(status=None) | Q(status__archive=False))
 
     def formatted_finish(self, obj):
         if not obj.finish_on:

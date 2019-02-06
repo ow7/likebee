@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
 from mptt.models import MPTTModel, TreeForeignKey
@@ -13,7 +14,8 @@ COLOR_TEXT_CHOICES = (
 
 class TaskManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(status__archive=False)
+        return super().get_queryset().filter(
+            Q(status=None) | Q(status__archive=False))
 
 
 class ColorChoices(models.Model):
