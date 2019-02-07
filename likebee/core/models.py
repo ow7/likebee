@@ -54,9 +54,6 @@ class Status(ColorChoices):
     done = models.BooleanField(
         _(u'Concluído?'), default=False
     )
-    archive = models.BooleanField(
-        _(u'Arquivado?'), default=False
-    )
 
     class Meta:
         verbose_name = _(u'Status')
