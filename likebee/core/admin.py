@@ -19,7 +19,8 @@ make_done.short_description = '''
 
 
 def make_archive(modeladmin, request, queryset):
-    queryset.update(archived=True, archived_on=datetime.now())
+    if request.user.is_superuser:
+        queryset.update(archived=True, archived_on=datetime.now())
 
 
 make_archive.short_description = '''
