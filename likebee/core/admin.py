@@ -170,3 +170,4 @@ admin.site.register(Sprint)
 admin.site.register(Project)
 admin.site.register(TaskType)
 
+# teste
