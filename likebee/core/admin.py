@@ -46,6 +46,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
         ('owner', admin.RelatedFieldListFilter),
         ('project', admin.RelatedFieldListFilter),
         ('status', admin.RelatedFieldListFilter),
+        'archived',
     ]
     search_fields = ['title', 'description']
     summernote_fields = ['description']
