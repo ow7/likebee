@@ -2,8 +2,7 @@ from django.contrib import admin
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
-from django.utils import timezone
-from datetime import date
+from datetime import date, datetime
 from django_summernote.admin import SummernoteModelAdmin
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 from .models import Priority, Status, Sprint, Project, Task, TaskType
@@ -20,7 +19,7 @@ make_done.short_description = '''
 
 
 def make_archive(modeladmin, request, queryset):
-    queryset.update(archived=True)
+    queryset.update(archived=True, archived_on=datetime.now())
 
 
 make_archive.short_description = '''

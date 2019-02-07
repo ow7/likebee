@@ -172,6 +172,9 @@ class Task(MPTTModel):
     archived = models.BooleanField(
         _(u'Arquivado?'), default=False
     )
+    archived_on = models.DateTimeField(
+        _(u'Data da arquivação'), blank=True, null=True
+    )
 
     all_objects = models.Manager()
     objects = TaskManager()
