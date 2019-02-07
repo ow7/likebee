@@ -14,8 +14,9 @@ COLOR_TEXT_CHOICES = (
 
 class TaskManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(
-            Q(status=None) | Q(status__archive=False))
+        # return super().get_queryset().filter(
+        #     Q(status=None) | Q(status__archive=False))
+        return super().get_queryset().filter(arcived=False)
 
 
 class ColorChoices(models.Model):
@@ -167,6 +168,9 @@ class Task(MPTTModel):
     time_estimate = models.DecimalField(
         _(u'Tempo'), max_digits=5, decimal_places=1,
         blank=True, null=True, help_text=_('Tempo estimado em horas')
+    )
+    archived = models.BooleanField(
+        _(u'Arquivado?'), default=False
     )
 
     all_objects = models.Manager()

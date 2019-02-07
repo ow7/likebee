@@ -20,8 +20,7 @@ make_done.short_description = '''
 
 
 def make_archive(modeladmin, request, queryset):
-    status = Status.objects.filter(archive=True).first()
-    queryset.update(status=status)
+    queryset.update(archived=True)
 
 
 make_archive.short_description = '''
@@ -56,7 +55,8 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
         qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(Q(status=None) | Q(status__archive=False))
+        # return qs.filter(Q(status=None) | Q(status__archive=False))
+        return qs.filter(archived=False)
 
     def formatted_finish(self, obj):
         if not obj.finish_on:
@@ -169,5 +169,3 @@ admin.site.register(Status)
 admin.site.register(Sprint)
 admin.site.register(Project)
 admin.site.register(TaskType)
-
-# teste
