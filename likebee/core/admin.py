@@ -52,6 +52,14 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
     summernote_fields = ['description']
     actions = [make_done, make_archive]
 
+    def get_exclude(self, request, obj=None):
+        excluded = super().get_exclude(request, obj) or []
+
+        if not request.user.is_superuser:
+            return excluded + ['archived', 'archived_on']
+
+        return excluded
+
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         if request.user.is_superuser:
