@@ -11,7 +11,7 @@ from ..accounts.models import Profile
 
 def make_done(modeladmin, request, queryset):
     status = Status.objects.filter(done=True).first()
-    queryset.update(status=status, done=True, done_one=datetime.now())
+    queryset.update(status=status, done=True, done_on=datetime.now())
 
 
 make_done.short_description = '''
