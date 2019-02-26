@@ -166,6 +166,12 @@ class Task(MPTTModel):
         _(u'Tempo'), max_digits=5, decimal_places=1,
         blank=True, null=True, help_text=_('Tempo estimado em horas')
     )
+    done = models.BooleanField(
+        _(u'Concluido?'), default=False
+    )
+    done_on = models.DateTimeField(
+        _(u'Data da conclusão'), blank=True, null=True
+    )
     archived = models.BooleanField(
         _(u'Arquivado?'), default=False
     )

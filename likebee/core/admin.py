@@ -11,7 +11,7 @@ from ..accounts.models import Profile
 
 def make_done(modeladmin, request, queryset):
     status = Status.objects.filter(done=True).first()
-    queryset.update(status=status)
+    queryset.update(status=status, done=True, done_one=datetime.now())
 
 
 make_done.short_description = '''
@@ -56,7 +56,7 @@ class TaskAdmin(SummernoteModelAdmin, DraggableMPTTAdmin):
         excluded = super().get_exclude(request, obj) or []
 
         if not request.user.is_superuser:
-            return excluded + ['archived', 'archived_on']
+            return excluded + ['done', 'done_on', 'archived', 'archived_on']
 
         return excluded
 
