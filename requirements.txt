@@ -18,3 +18,4 @@ django-debug-toolbar
 django-mptt==0.9.1
 django-imagekit==4.0.2
 django-summernote==0.8.11.4
+django-controlcenter==0.2.9

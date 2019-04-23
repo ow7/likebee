@@ -16,7 +16,7 @@ class TaskManager(models.Manager):
     def get_queryset(self):
         # return super().get_queryset().filter(
         #     Q(status=None) | Q(status__archive=False))
-        return super().get_queryset().filter(arcived=False)
+        return super().get_queryset().filter(archived=False)
 
 
 class ColorChoices(models.Model):
@@ -197,4 +197,4 @@ class Task(MPTTModel):
     # def __str__(self):
     #     return '{} - {}'.format(self.sprint, self.title)
     def __str__(self):
-        return self.title
+        return '{}. {}'.format(self.id, self.title)

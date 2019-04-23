@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'mptt',
     'imagekit',
+    'controlcenter',
 
     'likebee.core',
     'likebee.accounts',
@@ -170,10 +171,16 @@ ADMIN_SITE_HEADER = config('SITE_NAME')
 # SSl/TLS
 SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', config('PROTOCOL'))
-SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=False, cast=bool)
+SESSION_COOKIE_SECURE = config(
+    'SESSION_COOKIE_SECURE', default=False, cast=bool)
 CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=False, cast=bool)
 
 # DEBUG TOOLBAR
 INTERNAL_IPS = ('127.0.0.1',)
 
 AUTH_USER_MODEL = 'accounts.User'
+
+CONTROLCENTER_DASHBOARDS = (
+    ('empty', 'likebee.dashboards.EmptyDashboard'),
+    ('nonempty', 'likebee.dashboards.NonEmptyDashboard'),
+)
